@@ -107,6 +107,14 @@
                 code = aleatoire(editor_code.getValue());
                 editor_result.setValue(code);
             });
+            $('#overload').on('click', function () {
+                code = overload(editor_code.getValue());
+                editor_result.setValue(code);
+            });
+            $('#overload').on('click', function () {
+                code = overload(editor_code.getValue());
+                editor_result.setValue(code);
+            });
 
             var editor_code = CodeMirror.fromTextArea(document.getElementById("code"), {
                 lineNumbers: true,
@@ -117,8 +125,9 @@
                 lineNumbers: true,
                 mode: "text/x-java"
             });
-
-            editor_code.setValue('public class HelloWorld{public static void main(String []args){System.out.println("Hello World");}}')
+            editor_code.setSize($("#content").width(), 300);
+            editor_result.setSize($("#content").width(), 300);
+            editor_code.setValue('public class HelloWorld{public static void main(String []args){System.out.println("HelloWorld test World");}}')
         }); 
     </script>
 </body>

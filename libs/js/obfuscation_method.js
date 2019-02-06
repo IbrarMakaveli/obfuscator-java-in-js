@@ -15,15 +15,46 @@ var JAVA_KEYWORD = ["abstract","assert","boolean","break",
 "System","out","print","println"];
 
 function aleatoire(code){
+    code = remove_comment(code)
     add_import(code);
     word_list = unique_in_list(code.split(/\W+/)) // split (regex) par tout ce qui n'est pas une lettre alpahébtique
     for(i in word_list){
-        if(JAVA_KEYWORD.includes(word_list[i])==false ){ // include utilise la fonction for
-            random_val = random_value();
-            code = code.replace(new RegExp("\\b"+word_list[i]+"\\b", 'g'), random_val);
+        if(JAVA_KEYWORD.includes(word_list[i])==false && isNumeric(word_list[i])==false){ // include utilise la fonction for
+            random_val = random_value(25);
+            code = code.replace(new RegExp('\\b'+word_list[i]+'\\b(?=(?:(?:[^"]*"){2})*[^"]*$)', 'gm'), random_val);
         }
     }
     return code
+}
+
+function overload(code){
+    code = remove_comment(code)
+    add_import(code);
+    word_list = unique_in_list(code.split(/\W+/)) // split (regex) par tout ce qui n'est pas une lettre alpahébtique
+    for(i in word_list){
+        if(JAVA_KEYWORD.includes(word_list[i])==false && isNumeric(word_list[i])==false){ // include utilise la fonction for
+            random_val = random_value(2);
+            code = code.replace(new RegExp('\\b'+word_list[i]+'\\b(?=(?:(?:[^"]*"){2})*[^"]*$)', 'gm'), random_val);
+        }
+    }
+    return code
+}
+
+// Fontion de traitement
+
+function isNumeric(num){
+    return !isNaN(num)
+}
+
+function remove_comment(code){
+    code = code.replace(/(\/\*([\s\S]*?)\*\/)|(\/\/(.*)$)/gm, ''); //retire les commenaitres
+    code = code.replace(/\r?\n|\r\s/g,''); //retire les retour et tabs à la ligne
+    code = code.replace(/  +/g, ' '); //retire les multispaces à la ligne
+    return code;
+}
+
+function isNumber(val){
+    return true;
 }
 
 function unique_in_list(list) {
@@ -44,7 +75,6 @@ function unique_in_list(list) {
 function add_import(code){
     var import_tab = code.split(";");
     var importList = [];
- 
     for(i in import_tab){
         if(import_tab[i].includes("import") || import_tab[i].includes("package")){
             importList.push(import_tab[i])
@@ -59,11 +89,11 @@ function add_import(code){
     }
 }
 
-function random_value() {
+function random_value(size) {
     var val = "";
     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
-    for (var i = 0; i < 25; i++){
+    for (var i = 0; i < size; i++){
         val += possible.charAt(Math.floor(Math.random() * possible.length));
     }
     return val;

@@ -1,0 +1,23 @@
+// A Java program to demonstrate random number generation 
+// using java.util.Random;
+
+import java.util.Random;
+/*
+Function pour générer un random
+** class
+*/
+
+public class generateRandom{ 
+  
+    public static void main(String args[]) 
+    { 
+        // create instance of Random class 
+        Random rand = new Random(); 
+  
+        String str = "124";
+  
+        // Print random integers 
+        System.out.println("Random Integers: "+str); 
+
+    } 
+}
