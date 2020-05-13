@@ -1,2 +1,3 @@
-# obfuscation-js
-obfuscation-js
+# Simple Obfuscator Java Code
+
+Launch `index.html` and enjoy :) 
